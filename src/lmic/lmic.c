@@ -902,10 +902,10 @@ static ostime_t nextJoinState (void) {
     //
     u1_t failed = 0;
     if( LMIC.datarate != DR_SF8C ) {
-        LMIC.txChnl = 64+(LMIC.txChnl&7);
+        LMIC.txChnl = rand() % (15 + 1 - 8) + 8;
         setDrJoin(DRCHG_SET, DR_SF8C);
     } else {
-        LMIC.txChnl = os_getRndU1() & 0x3F;
+        LMIC.txChnl = rand() % (15 + 1 - 8) + 8;
         s1_t dr = DR_SF7 - ++LMIC.txCnt;
         if( dr < DR_SF10 ) {
             dr = DR_SF10;
